@@ -19,6 +19,9 @@ func main() {
 	e.POST("/", handlers.LoginHandler)
 	e.GET("/signup", handlers.SignupPage)
 	e.POST("/signup", handlers.CreateUserHandler)
+	e.GET("/home", handlers.HomeHandler)
+	e.GET("/logout", handlers.LogoutHandler)
+
 	e.HTTPErrorHandler = handlers.HTTPErrorHandler
 
 	log.Fatal(e.Start(":1323"))

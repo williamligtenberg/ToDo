@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo - Home</title>
+</head>
+<body>
+<ul>
+    {{ range .Cookies }}
+    <h1>Hello, {{ .Value }}!</h1>
+    <li>, Name: {{ .Name }}, Value: {{ .Value }}, Expires: {{ .Expires }}</li>
+    {{ end }}
+</ul>
+<a href="/logout">Logout</a>
+</body>
+</html>

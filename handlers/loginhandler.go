@@ -11,7 +11,21 @@ import (
 )
 
 func LoginPage(c echo.Context) error {
-	return c.Render(http.StatusOK, "index.html", nil)
+	// Check if the "username" cookie is present
+	_, err := c.Cookie("username")
+	if err != nil {
+		// User is not logged in, render index.html
+		return c.Render(http.StatusOK, "index.html", nil)
+	}
+
+	// User is logged in, retrieve all cookies and pass them to the template
+	cookies := c.Cookies()
+	data := map[string]interface{}{
+		"Cookies": cookies,
+	}
+
+	c.Render(http.StatusOK, "home.jet.html", data)
+	return nil
 }
 
 func LoginHandler(c echo.Context) error {
@@ -23,7 +37,7 @@ func LoginHandler(c echo.Context) error {
 		if AuthenticateUser(username, password) {
 			// Set the cookie
 			c.SetCookie(&http.Cookie{
-				Name:     "username",
+				Name:     "user",
 				Value:    username,
 				Expires:  time.Now().Add(time.Minute * 60),
 				Secure:   true,
