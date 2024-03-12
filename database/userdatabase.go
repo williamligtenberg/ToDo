@@ -11,17 +11,22 @@ var database *gorm.DB
 
 func connect() {
 	var err error
+
+	// SQLite database openen.
 	database, err = gorm.Open(sqlite.Open("users.db"))
 	if err != nil {
 		panic(err)
 	}
-	err = database.AutoMigrate(models.User{})
+
+	// User en Recipe models migreren.
+	err = database.AutoMigrate(&models.User{}, &models.ToDo{})
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func DB() *gorm.DB {
+	// Database connectie.
 	if database == nil {
 		connect()
 	}

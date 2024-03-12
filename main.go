@@ -9,17 +9,17 @@ import (
 )
 
 func main() {
-
 	t := &Template{View: jet.NewSet(jet.NewOSFileSystemLoader("./templates"), jet.InDevelopmentMode())}
 	e := echo.New()
 	e.Renderer = t
-	e.Static("/templates", "templates") //static folder
+	e.Static("/templates", "templates")
 
 	e.GET("/", handlers.LoginPage)
 	e.POST("/", handlers.LoginHandler)
 	e.GET("/signup", handlers.SignupPage)
 	e.POST("/signup", handlers.CreateUserHandler)
 	e.GET("/home", handlers.HomeHandler)
+	e.POST("/home", handlers.CreateToDoHandler)
 	e.GET("/logout", handlers.LogoutHandler)
 
 	e.HTTPErrorHandler = handlers.HTTPErrorHandler

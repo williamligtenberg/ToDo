@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/templates/style.css">
     <title>ToDo - Home</title>
 </head>
 <body>
-<ul>
+
     {{ range .Cookies }}
     <h1>Hello, {{ .Value }}!</h1>
-    <li>, Name: {{ .Name }}, Value: {{ .Value }}, Expires: {{ .Expires }}</li>
     {{ end }}
-</ul>
+<h2>New ToDo:</h2>
+    <form method="POST" action="/home">
+        <input type="text" name="title" placeholder="Title">
+        <input type="password" name="description" placeholder="Description">
+        <input type="submit" value="Submit">
+        <h2>Your ToDo's:</h2>
 <a href="/logout">Logout</a>
+
 </body>
 </html>

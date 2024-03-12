@@ -1,26 +1,30 @@
 package handlers
 
 import (
+	"ToDoApplication/database"
+	"ToDoApplication/models"
 	"github.com/labstack/echo/v4"
-	"log"
 	"net/http"
 )
 
 func HomeHandler(c echo.Context) error {
-	// Retrieve all cookies from the request
+	// Cookies naar de HTML sturen.
 	cookies := c.Cookies()
-
-	// Pass the cookies to the template
 	data := map[string]interface{}{
 		"Cookies": cookies,
 	}
 
-	// Render the HTML template with the data
-	if err := c.Render(http.StatusOK, "home.jet.html", data); err != nil {
-		// Handle the error, e.g., log it
-		log.Println("Error rendering template:", err)
-		return err
-	}
+	// HTML pagina renderen inclusief cookies erbij.
+	return c.Render(http.StatusOK, "home.jet.html", data)
 
-	return nil
+}
+
+func CreateToDoHandler(c echo.Context) error {
+	//CreateToDo functie aanroepen en title en description uit de form halen.
+	database.CreateToDo(models.ToDo{
+		Title:       c.FormValue("title"),
+		Description: c.FormValue("description"),
+	})
+	// Doorsturen naar de home pagina.
+	return c.Redirect(http.StatusFound, "/home")
 }

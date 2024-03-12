@@ -11,14 +11,14 @@ import (
 )
 
 func LoginPage(c echo.Context) error {
-	// Check if the "username" cookie is present
+	// Kijken of de username cookie er is.
 	_, err := c.Cookie("username")
 	if err != nil {
-		// User is not logged in, render index.html
+		// De loginpagina weer laten zien omdat de gebruiker niet juist is ingelogd.
 		return c.Render(http.StatusOK, "index.html", nil)
 	}
 
-	// User is logged in, retrieve all cookies and pass them to the template
+	// Alle cookies ophalen en gebruiker naar home.jet.html sturen.
 	cookies := c.Cookies()
 	data := map[string]interface{}{
 		"Cookies": cookies,
@@ -29,23 +29,24 @@ func LoginPage(c echo.Context) error {
 }
 
 func LoginHandler(c echo.Context) error {
+	// Username en password uit de form halen.
 	if c.Request().Method == http.MethodPost {
 		username := c.FormValue("username")
 		password := c.FormValue("password")
 
-		// Check if the username and password match using GORM
+		// Kijken of de gegevens matchen via AuthenticateUser.
 		if AuthenticateUser(username, password) {
-			// Set the cookie
+			// Cookie zetten en meegeven.
 			c.SetCookie(&http.Cookie{
 				Name:     "user",
 				Value:    username,
 				Expires:  time.Now().Add(time.Minute * 60),
 				Secure:   true,
 				HttpOnly: true,
-				SameSite: 1, //houd de cookie alleen op de site, speelt niet naar derden
+				SameSite: 1,
 			})
 
-			// Redirect to /home
+			// Naar de homepagina sturen.
 			return c.Redirect(http.StatusSeeOther, "/home")
 		}
 		return echo.NewHTTPError(http.StatusUnauthorized, "Invalid username or password")
@@ -56,7 +57,7 @@ func LoginHandler(c echo.Context) error {
 
 func AuthenticateUser(username, password string) bool {
 	var user models.User
-	// Find the user by username and password using GORM
+	// Via gorm kijken of de username en password kloppen.
 	err := database.DB().Where("username = ? AND password = ?", username, password).First(&user).Error
 	if err == gorm.ErrRecordNotFound {
 		return false
