@@ -16,5 +16,5 @@ func LogoutHandler(c echo.Context) error {
 		SameSite: http.SameSiteStrictMode,
 	})
 	//Terugsturen naar de inlogpagina.
-	return c.Redirect(http.StatusSeeOther, "/")
+	return c.Redirect(http.StatusSeeOther, "/login")
 }

@@ -15,7 +15,7 @@ func LoginPage(c echo.Context) error {
 	_, err := c.Cookie("username")
 	if err != nil {
 		// De loginpagina weer laten zien omdat de gebruiker niet juist is ingelogd.
-		return c.Render(http.StatusOK, "index.html", nil)
+		return c.Render(http.StatusOK, "login.html", nil)
 	}
 
 	// Alle cookies ophalen en gebruiker naar todos.html sturen.

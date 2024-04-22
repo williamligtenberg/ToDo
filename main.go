@@ -9,13 +9,18 @@ import (
 )
 
 func main() {
+	// Template initializeren.
 	t := &Template{View: jet.NewSet(jet.NewOSFileSystemLoader("./templates"), jet.InDevelopmentMode())}
+
+	// Echo initializeren.
 	e := echo.New()
 	e.Renderer = t
 	e.Static("/templates", "templates")
 
-	e.GET("/", handlers.LoginPage)
-	e.POST("/", handlers.LoginHandler)
+	// Routes.
+	e.GET("/", handlers.HomePage)
+	e.GET("/login", handlers.LoginPage)
+	e.POST("/login", handlers.LoginHandler)
 	e.GET("/signup", handlers.SignupPage)
 	e.POST("/signup", handlers.CreateUserHandler)
 	e.GET("/logout", handlers.LogoutHandler)
@@ -26,7 +31,9 @@ func main() {
 
 	e.HTTPErrorHandler = handlers.HTTPErrorHandler
 
-	log.Fatal(e.Start(":1323"))
+	if err := e.Start(":1323"); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }
 
 type Template struct {
@@ -34,18 +41,29 @@ type Template struct {
 }
 
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	log.Printf("Rendering template: %s\n", name)
+
+	// Template halen.
 	template, err := t.View.GetTemplate(name)
 	if err != nil {
-		log.Println(err.Error())
+		log.Printf("Failed to retrieve template %s: %s\n", name, err.Error())
 		return err
 	}
+
+	// Variables preparen.
 	vars := make(jet.VarMap)
 	if c.Get("flash") != nil {
 		vars.Set("flash", c.Get("flash"))
 	}
+
+	// Templates executen.
+	log.Printf("Executing template: %s\n", name)
 	err = template.Execute(w, vars, data)
 	if err != nil {
+		log.Printf("Failed to execute template %s: %s\n", name, err.Error())
 		return err
 	}
+
+	log.Printf("Template %s rendered successfully\n", name)
 	return nil
 }

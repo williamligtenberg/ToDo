@@ -23,15 +23,17 @@ func RetrieveToDo(c echo.Context) []models.ToDo {
 	return result
 }
 
-func DeleteToDo(id int) {
+func DeleteToDo(id int) error {
 	var result models.ToDo
 	if err := DB().Where("id = ?", id).First(&result).Error; err != nil {
-		fmt.Println("error")
-		return
+		fmt.Println("error:", err)
+		return err
 	}
 
 	if err := DB().Delete(&result).Error; err != nil {
-		fmt.Println("error")
-		return
+		fmt.Println("error:", err)
+		return err
 	}
+
+	return nil
 }

@@ -19,5 +19,5 @@ func CreateUserHandler(c echo.Context) error {
 		Password: c.FormValue("password"),
 	})
 	// Doorsturen naar de login pagina.
-	return c.Redirect(http.StatusFound, "/")
+	return c.Redirect(http.StatusFound, "/login")
 }

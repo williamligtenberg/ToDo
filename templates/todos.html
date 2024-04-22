@@ -8,11 +8,13 @@
 </head>
 <body>
 {{ range .Cookies }}
-<h1>Hello, {{ .Value }}!</h1>
+<h1 class="Title">Hello, {{ .Value }}!</h1>
 {{ end }}
-<a class="button" href="/todos/new">Add new ToDo</a>
-<a class="button" href="/logout">Logout</a>
+<a class="logout-button" href="/logout">Logout</a>
+
 <h2>Your ToDo's:</h2>
+<a class="button" href="/todos/new">Add new ToDo</a>
+
 {{ range .Todos }}
 <div class="container">
     <h3>{{ .Title }}</h3>
