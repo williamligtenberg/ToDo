@@ -18,13 +18,13 @@ func LoginPage(c echo.Context) error {
 		return c.Render(http.StatusOK, "index.html", nil)
 	}
 
-	// Alle cookies ophalen en gebruiker naar home.jet.html sturen.
+	// Alle cookies ophalen en gebruiker naar todos.html sturen.
 	cookies := c.Cookies()
 	data := map[string]interface{}{
 		"Cookies": cookies,
 	}
 
-	c.Render(http.StatusOK, "home.jet.html", data)
+	c.Render(http.StatusOK, "todos.html", data)
 	return nil
 }
 
@@ -47,7 +47,7 @@ func LoginHandler(c echo.Context) error {
 			})
 
 			// Naar de homepagina sturen.
-			return c.Redirect(http.StatusSeeOther, "/home")
+			return c.Redirect(http.StatusSeeOther, "/todos")
 		}
 		return echo.NewHTTPError(http.StatusUnauthorized, "Invalid username or password")
 	}

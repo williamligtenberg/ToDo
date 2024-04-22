@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/templates/style.css">
+    <title>ToDo - Home</title>
+</head>
+<body>
+{{ range .Cookies }}
+<h1>Hello, {{ .Value }}!</h1>
+{{ end }}
+<a class="button" href="/todos/new">Add new ToDo</a>
+<a class="button" href="/logout">Logout</a>
+<h2>Your ToDo's:</h2>
+{{ range .Todos }}
+<div class="container">
+    <h3>{{ .Title }}</h3>
+    <p>{{ .Description }}</p>
+    <form action="/todos/delete/{{.ID}}" method="get">
+        <input type="hidden" name="todo_id" value="{{ .ID }}">
+        <button type="submit" class="button">Delete</button>
+    </form>
+</div>
+{{ end }}
+</body>
+</html>

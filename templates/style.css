@@ -1,9 +1,110 @@
-html {
-    height: 100%;
-    box-sizing: border-box;
-    text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
 }
 
-body{
-    background-color: #97c4ff;
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+body {
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 1.3;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #5b8dff;
+    color: #000000;
+}
+
+/* Centering the heading */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Styling the ToDo items */
+.container {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Set a maximum width for the todo items */
+    margin-left: auto; /* Auto margin on left and right to center */
+    margin-right: auto;
+}
+
+/* Styling the title of the ToDo */
+.container h3 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Styling the description of the ToDo */
+.container p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
+
+
+.button {
+    background-color: #1e489f;
+    border-radius: 0.3rem;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0.2rem;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.button:hover,
+.button:focus {
+    background-color: #2d5dc0;
+}
+
+.Form {
+    width: 100%;
+    color: rgb(36, 35, 42);
+    font-size: 16px;
+    line-height: 20px;
+    min-height: 28px;
+    border-radius: 4px;
+    margin-bottom: 0.8rem;
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+    background: rgb(251, 251, 251);
+    transition: all 0.1s ease 0s;
+
+    :focus {
+        border: 2px solid #2d5dc0;
+    }
 }

@@ -19,7 +19,12 @@ func connect() {
 	}
 
 	// User en Recipe models migreren.
-	err = database.AutoMigrate(&models.User{}, &models.ToDo{})
+	err = database.AutoMigrate(&models.User{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = database.AutoMigrate(&models.ToDo{})
 	if err != nil {
 		log.Fatal(err)
 	}

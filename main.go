@@ -18,9 +18,11 @@ func main() {
 	e.POST("/", handlers.LoginHandler)
 	e.GET("/signup", handlers.SignupPage)
 	e.POST("/signup", handlers.CreateUserHandler)
-	e.GET("/home", handlers.HomeHandler)
-	e.POST("/home", handlers.CreateToDoHandler)
 	e.GET("/logout", handlers.LogoutHandler)
+	e.GET("/todos", handlers.ToDosHandler)
+	e.GET("/todos/new", handlers.NewToDoPageHandler)
+	e.POST("/todos/new", handlers.CreateToDoHandler)
+	e.GET("/todos/delete/:id", handlers.DeleteToDoHandler)
 
 	e.HTTPErrorHandler = handlers.HTTPErrorHandler
 

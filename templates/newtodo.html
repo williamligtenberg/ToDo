@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/templates/style.css">
+    <title>ToDo - Add new ToDo</title>
+</head>
+<body>
+{{ range .Cookies }}
+<h1>Hello, {{ .Value }}!</h1>
+{{ end }}
+<h2>Create your new ToDo:</h2>
+<div class="container">
+<form method="POST" action="/todos/new">
+    <input class="Form" type="text" name="title" placeholder="Title" required>
+    <input class="Form" type="text" name="description" placeholder="Description" required>
+    <a class="button" href="/todos">Cancel</a>
+    <input class="button" type="submit" value="Submit">
+</form>
+</div>
+</body>
+</html>
