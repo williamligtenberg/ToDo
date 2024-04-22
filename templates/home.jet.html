@@ -13,11 +13,11 @@
     {{ end }}
 <h2>New ToDo:</h2>
     <form method="POST" action="/home">
-        <input type="text" name="title" placeholder="Title">
-        <input type="password" name="description" placeholder="Description">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="password" name="description" placeholder="Description" required>
         <input type="submit" value="Submit">
         <h2>Your ToDo's:</h2>
 <a href="/logout">Logout</a>
-
+    </form>
 </body>
 </html>

@@ -7,16 +7,14 @@ import (
 
 func LogoutHandler(c echo.Context) error {
 	// De cookies "resetten" zodat je uitgelogd word.
-	cookie := new(http.Cookie)
-	cookie.Name = "user"
-	cookie.Value = ""
-	cookie.MaxAge = -1
-	cookie.Secure = true
-	cookie.HttpOnly = true
-	cookie.SameSite = http.SameSiteStrictMode
-	cookie.Path = "/"
-
-	c.SetCookie(cookie)
+	c.SetCookie(&http.Cookie{
+		Name:     "user",
+		Value:    "",
+		MaxAge:   -1,
+		Secure:   true,
+		HttpOnly: true,
+		SameSite: http.SameSiteStrictMode,
+	})
 	//Terugsturen naar de inlogpagina.
 	return c.Redirect(http.StatusSeeOther, "/")
 }
