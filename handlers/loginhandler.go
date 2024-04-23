@@ -50,7 +50,7 @@ func LoginHandler(c echo.Context) error {
 			return c.Redirect(http.StatusSeeOther, "/todos")
 		}
 		// Error afhandelen.
-		return echo.NewHTTPError(http.StatusUnauthorized, "Invalid username or password")
+		return c.Redirect(http.StatusSeeOther, "/login?error=incorrect")
 	}
 	// Error afhandelen.
 	return c.NoContent(http.StatusBadRequest)

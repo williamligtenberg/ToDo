@@ -8,14 +8,26 @@
 <body>
 <h1 class="Title">Welcome to ToDo!</h1>
 <div class="container">
-
-<p>Please login to access your ToDo's</p>
-<form method="POST" action="/login">
-    <input  class="Form" type="text" name="username" placeholder="Username" required>
-    <input  class="Form" type="password" name="password" placeholder="Password" required>
-    <input class="button" type="submit" value="Login">
-</form>
+    <p id="error-message" style="color: #e30000"></p>
+    <p>Please login to access your ToDo's</p>
+    <form id="login-form" method="POST" action="/login">
+        <input  class="Form" type="text" name="username" placeholder="Username" required>
+        <input  class="Form" type="password" name="password" placeholder="Password" required>
+        <input class="button" type="submit" value="Login">
+    </form>
     <p> Don't have an account? <a href="/signup">Sign up</a> to get started.</p>
 </div>
+
+<script>
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        if (error === 'incorrect') {
+            document.getElementById('error-message').innerText = 'Incorrect username or password. Please try again.';
+        }
+    };
+</script>
 </body>
 </html>
+
