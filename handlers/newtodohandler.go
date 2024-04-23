@@ -19,10 +19,11 @@ func NewToDoPageHandler(c echo.Context) error {
 }
 
 func CreateToDoHandler(c echo.Context) error {
-	//Check for user who's logged in
+	// Kijken wie er ingelogd is.
 	userCookie, err := c.Cookie("user")
+	// Error afhandelen.
 	if err != nil {
-		fmt.Println("Error while getting username cookie")
+		fmt.Println("error while getting username cookie")
 	}
 	username := userCookie.Value
 	//CreateToDo functie aanroepen, title en description uit de form halen en username van de cookie.

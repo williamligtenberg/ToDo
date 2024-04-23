@@ -7,4 +7,5 @@ type ToDo struct {
 	Title       string
 	Description string
 	Creator     string
+	Done        bool
 }

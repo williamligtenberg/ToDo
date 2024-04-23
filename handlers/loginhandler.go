@@ -49,9 +49,10 @@ func LoginHandler(c echo.Context) error {
 			// Naar de homepagina sturen.
 			return c.Redirect(http.StatusSeeOther, "/todos")
 		}
+		// Error afhandelen.
 		return echo.NewHTTPError(http.StatusUnauthorized, "Invalid username or password")
 	}
-
+	// Error afhandelen.
 	return c.NoContent(http.StatusBadRequest)
 }
 
@@ -59,11 +60,11 @@ func AuthenticateUser(username, password string) bool {
 	var user models.User
 	// Via gorm kijken of de username en password kloppen.
 	err := database.DB().Where("username = ? AND password = ?", username, password).First(&user).Error
+	// Error afhandelen.
 	if err == gorm.ErrRecordNotFound {
 		return false
 	} else if err != nil {
 		log.Fatal(err)
 	}
-
 	return true
 }

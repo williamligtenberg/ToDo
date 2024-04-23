@@ -8,17 +8,20 @@ import (
 	"strconv"
 )
 
-func DeleteToDoHandler(c echo.Context) error {
+func MarkToDoHandler(c echo.Context) error {
 	// todoID maken.
 	todoID, err := strconv.Atoi(c.Param("id"))
+	// Error afhandelen.
 	if err != nil {
 		log.Printf("Failed to get ID")
 		return err
 	}
-	//De DeleteToDo function aanroepen en todoID meegeven. IDK waarom hij DeleteToDo soms niet vindt maar hij werkt wel (?)
-	err = database.DeleteToDo(todoID)
+
+	// ToDo done in database updaten.
+	err = database.MarkToDoAsDone(todoID)
+	// Error afhandelen.
 	if err != nil {
-		log.Printf("Failed to reach the DeleteToDo function passing the todoID: %v", err)
+		log.Printf("Failed to update ToDo status: %v", err)
 		return err
 	}
 	return c.Redirect(http.StatusFound, "/todos")

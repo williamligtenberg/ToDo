@@ -2,38 +2,45 @@ package database
 
 import (
 	"ToDoApplication/models"
+	"fmt"
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
-	"log"
 )
 
 var database *gorm.DB
 
-func connect() {
+func connect() error {
 	var err error
 
-	// SQLite database openen.
-	database, err = gorm.Open(sqlite.Open("users.db"))
+	//SQLite database openen.
+	database, err = gorm.Open(sqlite.Open("users.db"), &gorm.Config{})
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("failed to open database: %v", err)
 	}
 
-	// User en Recipe models migreren.
-	err = database.AutoMigrate(&models.User{})
-	if err != nil {
-		log.Fatal(err)
+	// User model migreren.
+	if err := database.AutoMigrate(&models.User{}); err != nil {
+		// Error afhandelen.
+		return fmt.Errorf("failed to migrate User model: %v", err)
 	}
 
-	err = database.AutoMigrate(&models.ToDo{})
-	if err != nil {
-		log.Fatal(err)
+	// ToDo model migreren.
+	if err := database.AutoMigrate(&models.ToDo{}); err != nil {
+		// Error afhandelen.
+		return fmt.Errorf("failed to migrate ToDo model: %v", err)
 	}
+
+	return nil
 }
 
 func DB() *gorm.DB {
-	// Database connectie.
 	if database == nil {
-		connect()
+		// Database connectie maken.
+		if err := connect(); err != nil {
+			// Error afhandelen.
+			fmt.Errorf("error connecting database connection: %v", err)
+			return nil
+		}
 	}
 	return database
 }

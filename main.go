@@ -28,6 +28,7 @@ func main() {
 	e.GET("/todos/new", handlers.NewToDoPageHandler)
 	e.POST("/todos/new", handlers.CreateToDoHandler)
 	e.GET("/todos/delete/:id", handlers.DeleteToDoHandler)
+	e.GET("/todos/mark/:id", handlers.MarkToDoHandler)
 
 	e.HTTPErrorHandler = handlers.HTTPErrorHandler
 
