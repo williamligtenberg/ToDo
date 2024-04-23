@@ -93,10 +93,6 @@ h2 {
     background-color: #ffe054;
 }
 
-.Done {
-    font-size: 200px;
-}
-
 .Form {
     width: 100%;
     color: rgb(36, 35, 42);
@@ -134,4 +130,31 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
+}
+
+.Done {
+    background-color: #60fa5b;
+    border-radius: 0.3rem;
+    border-style: none;
+    box-sizing: border-box;
+    color: #1c4419;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0.4rem;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
