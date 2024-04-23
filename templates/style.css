@@ -93,6 +93,16 @@ h2 {
     background-color: #ffe054;
 }
 
+.delete-button {
+    background-color: #FF5757; /* Red color for delete button */
+    color: white; /* Text color for delete button */
+}
+
+.delete-button:hover,
+.delete-button:focus {
+    background-color: #FF7E7E; /* Lighter red on hover/focus */
+}
+
 .Form {
     width: 100%;
     color: rgb(36, 35, 42);
@@ -157,8 +167,4 @@ h2 {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-}
-
-.error-message {
-    color: red;
 }
