@@ -143,12 +143,11 @@ h2 {
 }
 
 .Done {
-    background-color: #60fa5b;
+    background-color: #64e15f;
     border-radius: 0.3rem;
     border-style: none;
     box-sizing: border-box;
     color: #1c4419;
-    cursor: pointer;
     display: inline-block;
     font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;

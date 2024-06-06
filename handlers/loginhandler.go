@@ -29,14 +29,11 @@ func LoginPage(c echo.Context) error {
 }
 
 func LoginHandler(c echo.Context) error {
-	// Username en password uit de form halen.
 	if c.Request().Method == http.MethodPost {
 		username := c.FormValue("username")
 		password := c.FormValue("password")
 
-		// Kijken of de gegevens matchen via AuthenticateUser.
 		if AuthenticateUser(username, password) {
-			// Cookie zetten en meegeven.
 			c.SetCookie(&http.Cookie{
 				Name:     "user",
 				Value:    username,
@@ -46,21 +43,16 @@ func LoginHandler(c echo.Context) error {
 				SameSite: 1,
 			})
 
-			// Naar de homepagina sturen.
 			return c.Redirect(http.StatusSeeOther, "/todos")
 		}
-		// Error afhandelen.
 		return c.Redirect(http.StatusSeeOther, "/login?error=incorrect")
 	}
-	// Error afhandelen.
 	return c.NoContent(http.StatusBadRequest)
 }
 
 func AuthenticateUser(username, password string) bool {
 	var user models.User
-	// Via gorm kijken of de username en password kloppen.
 	err := database.DB().Where("username = ? AND password = ?", username, password).First(&user).Error
-	// Error afhandelen.
 	if err == gorm.ErrRecordNotFound {
 		return false
 	} else if err != nil {

@@ -6,6 +6,5 @@ import (
 )
 
 func HomePage(c echo.Context) error {
-	// Doorsturen naar de loginpagina.
 	return c.Redirect(http.StatusSeeOther, "/login")
 }

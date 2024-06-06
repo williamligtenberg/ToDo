@@ -9,13 +9,11 @@ import (
 )
 
 func DeleteToDoHandler(c echo.Context) error {
-	// todoID maken.
 	todoID, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		log.Printf("Failed to get ID")
 		return err
 	}
-	//De DeleteToDo function aanroepen en todoID meegeven. IDK waarom hij DeleteToDo soms niet vindt maar hij werkt wel (?)
 	err = database.DeleteToDo(todoID)
 	if err != nil {
 		log.Printf("Failed to reach the DeleteToDo function passing the todoID: %v", err)

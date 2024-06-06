@@ -6,7 +6,6 @@ import (
 )
 
 func LogoutHandler(c echo.Context) error {
-	// De cookies "resetten" zodat je uitgelogd word.
 	c.SetCookie(&http.Cookie{
 		Name:     "user",
 		Value:    "",
@@ -15,6 +14,5 @@ func LogoutHandler(c echo.Context) error {
 		HttpOnly: true,
 		SameSite: http.SameSiteStrictMode,
 	})
-	//Terugsturen naar de inlogpagina.
 	return c.Redirect(http.StatusSeeOther, "/login")
 }

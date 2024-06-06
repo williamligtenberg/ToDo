@@ -9,8 +9,6 @@ import (
 )
 
 func NewToDoPageHandler(c echo.Context) error {
-	// NewToDo pagina renderen.
-	// Cookies naar de HTML sturen.
 	cookies := c.Cookies()
 	data := map[string]interface{}{
 		"Cookies": cookies,
@@ -19,19 +17,15 @@ func NewToDoPageHandler(c echo.Context) error {
 }
 
 func CreateToDoHandler(c echo.Context) error {
-	// Kijken wie er ingelogd is.
 	userCookie, err := c.Cookie("user")
-	// Error afhandelen.
 	if err != nil {
 		fmt.Println("error while getting username cookie")
 	}
 	username := userCookie.Value
-	//CreateToDo functie aanroepen, title en description uit de form halen en username van de cookie.
 	database.CreateToDo(models.ToDo{
 		Title:       c.FormValue("title"),
 		Description: c.FormValue("description"),
 		Creator:     username,
 	})
-	// Doorsturen naar de home pagina.
 	return c.Redirect(http.StatusFound, "/todos")
 }

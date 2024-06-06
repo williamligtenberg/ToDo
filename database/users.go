@@ -6,7 +6,6 @@ import (
 )
 
 func CreateUser(user models.User) error {
-	// User aanmaken en error afhandelen.
 	if err := DB().Create(&user).Error; err != nil {
 		log.Errorf("Error creating user")
 	}
